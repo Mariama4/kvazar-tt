@@ -1,6 +1,7 @@
 from flask import abort
 
-from . import UserModel
+from .userModel import UserModel
+from .userModel import db
 from .interfaces import IUserService
 
 
@@ -43,7 +44,23 @@ class UserService(IUserService):
             return users
 
     def create(self, data: UserModel) -> UserModel:
-        pass
+        """Creates a new user in the database.
+
+        :param data: Dict containing the data for the new user.
+        :return: The `UserModel` object representing the created user.
+        """
+        try:
+            user = self.userModel(
+                username=data["username"],
+                email=data["email"]
+            )
+
+            db.session.add(user)
+            db.session.commit()
+        except Exception:
+            abort(403, "Ошибка создания пользователя")
+        else:
+            return user
 
     def getById(self, id: int) -> UserModel:
         pass
