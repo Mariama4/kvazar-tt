@@ -1,3 +1,5 @@
+from flask import abort
+
 from . import UserModel
 from .interfaces import IUserService
 
@@ -11,7 +13,16 @@ class UserService(IUserService):
     userModel: UserModel = UserModel
 
     def getAll(self) -> list[UserModel]:
-        pass
+        """Gets all users from the database.
+
+        :return: List of `UserModel` objects representing the users.
+        """
+        try:
+            users = self.userModel.query.all()
+        except Exception:
+            abort(403, "Ошибка отправки пользователей.")
+        else:
+            return users
 
     def getPaginatedUsers(self, page: int, per_page: int) -> list[UserModel]:
         pass
