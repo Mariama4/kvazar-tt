@@ -38,7 +38,13 @@ class UserController(IUserController):
         return jsonify(user)
 
     def getById(self, id: int) -> Response:
-        ...
+        """Gets a user with the specified ID from the application.
+
+        :param id: The ID the user to retrieve.
+        :return: Flask `Response` object containing the JSON representation of the retrieved user.
+        """
+        user = self.userService.getById(id)
+        return jsonify(user)
 
     def updateById(self, id: int) -> Response:
         ...
