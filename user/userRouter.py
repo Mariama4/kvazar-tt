@@ -44,3 +44,9 @@ class UserRouter(IUserRouter):
             view_func=self.userController.updateById,
             methods=["PATCH"],
         )
+
+        self.app.add_url_rule(
+            rule=f"/{self.name}/<int:id>",
+            view_func=self.userController.delete,
+            methods=["DELETE"],
+        )
