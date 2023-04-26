@@ -20,3 +20,9 @@ class UserRouter(IUserRouter):
         """
         self.app: Type[Flask] = app
         self.name: str = name
+
+        self.app.add_url_rule(
+            rule=f"/{self.name}/",
+            view_func=self.userController.getAll,
+            methods=["GET"]
+        )
