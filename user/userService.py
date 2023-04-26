@@ -25,7 +25,22 @@ class UserService(IUserService):
             return users
 
     def getPaginatedUsers(self, page: int, per_page: int) -> list[UserModel]:
-        pass
+        """Gets paginated users from the database.
+
+        :param page: The page number of the paginated users.
+        :param per_page: The number of users per page in the paginated results.
+        :return: List of `UserModel` objects representing the paginated users.
+        """
+        users_query = self.userModel.query.paginate(
+            page=page,
+            per_page=per_page
+        )
+        try:
+            users = users_query.items
+        except Exception:
+            abort(403, "Ошибка отправки пользователей")
+        else:
+            return users
 
     def create(self, data: UserModel) -> UserModel:
         pass
