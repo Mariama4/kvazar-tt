@@ -63,7 +63,13 @@ class UserService(IUserService):
             return user
 
     def getById(self, id: int) -> UserModel:
-        pass
+        """Gets a user with the specified ID from the database.
+
+        :param id: The ID of the user to retrieve.
+        :return: The `UserModel` object representing the retrieved user.
+        """
+        user = self.userModel.query.get_or_404(id)
+        return user
 
     def updateById(self, id: int, data: UserModel) -> UserModel:
         pass
