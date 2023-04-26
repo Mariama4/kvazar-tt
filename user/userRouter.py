@@ -26,3 +26,9 @@ class UserRouter(IUserRouter):
             view_func=self.userController.getAll,
             methods=["GET"]
         )
+
+        self.app.add_url_rule(
+            rule=f"/{self.name}/",
+            view_func=self.userController.create,
+            methods=["POST"]
+        )
