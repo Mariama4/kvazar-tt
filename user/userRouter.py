@@ -10,6 +10,7 @@ class UserRouter(IUserRouter):
     Attributes:
         userController: Controller class used to handle user business-logic.
     """
+
     userController: IUserController = UserController()
 
     def __init__(self, app: Flask, name: str) -> None:
@@ -22,15 +23,13 @@ class UserRouter(IUserRouter):
         self.name: str = name
 
         self.app.add_url_rule(
-            rule=f"/{self.name}/",
-            view_func=self.userController.get,
-            methods=["GET"]
+            rule=f"/{self.name}/", view_func=self.userController.get, methods=["GET"]
         )
 
         self.app.add_url_rule(
             rule=f"/{self.name}/",
             view_func=self.userController.create,
-            methods=["POST"]
+            methods=["POST"],
         )
 
         self.app.add_url_rule(

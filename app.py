@@ -13,5 +13,5 @@ with app.app_context():
 
 UserRouter(app, "users")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

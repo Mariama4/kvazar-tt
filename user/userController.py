@@ -11,6 +11,7 @@ class UserController(IUserController):
     Attributes:
         userService: Service class used to handle the user resource.
     """
+
     userService: IUserService = UserService()
 
     def get(self) -> Response:

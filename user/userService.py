@@ -13,6 +13,7 @@ class UserService(IUserService):
     Attributes:
         userModel: Class representing the user model in application.
     """
+
     userModel: Type[UserModel] = UserModel
 
     def getAll(self) -> list[UserModel]:
@@ -34,10 +35,7 @@ class UserService(IUserService):
         :param per_page: The number of users per page in the paginated results.
         :return: List of `UserModel` objects representing the paginated users.
         """
-        users_query = self.userModel.query.paginate(
-            page=page,
-            per_page=per_page
-        )
+        users_query = self.userModel.query.paginate(page=page, per_page=per_page)
         try:
             users = users_query.items
         except Exception:
@@ -52,10 +50,7 @@ class UserService(IUserService):
         :return: The `UserModel` object representing the created user.
         """
         try:
-            user = self.userModel(
-                username=data["username"],
-                email=data["email"]
-            )
+            user = self.userModel(username=data["username"], email=data["email"])
 
             db.session.add(user)
             db.session.commit()
