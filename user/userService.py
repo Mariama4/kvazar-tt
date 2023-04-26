@@ -72,7 +72,22 @@ class UserService(IUserService):
         return user
 
     def updateById(self, id: int, data: UserModel) -> UserModel:
-        pass
+        """Updates a user with the specified ID in the database.
+
+        :param id: The ID of the user to update.
+        :param data: Dict containing the updated data for the user.
+        :return: The `UserModel` object representing the updated user.
+        """
+        user = self.userModel.query.get_or_404(id)
+        try:
+            user.username = data["username"]
+            user.email = data["email"]
+
+            db.session.commit()
+        except Exception:
+            abort(403, "Ошибка обновления пользователя")
+        else:
+            return user
 
     def delete(self, id: int) -> bool:
         pass
