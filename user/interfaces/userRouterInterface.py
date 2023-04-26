@@ -4,4 +4,4 @@ from .userControllerInterface import IUserController
 
 
 class IUserRouter:
-    userController: Type[IUserController]
+    userController: IUserController

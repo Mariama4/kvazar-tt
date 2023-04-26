@@ -1,8 +1,10 @@
+from typing import Type
+
 from ..userModel import UserModel
 
 
 class IUserService:
-    userModel: UserModel
+    userModel: Type[UserModel]
 
     def getAll(self) -> list[UserModel]:
         raise NotImplementedError

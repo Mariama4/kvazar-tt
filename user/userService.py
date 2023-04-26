@@ -1,3 +1,5 @@
+from typing import Type
+
 from flask import abort
 
 from .userModel import UserModel
@@ -11,7 +13,7 @@ class UserService(IUserService):
     Attributes:
         userModel: Class representing the user model in application.
     """
-    userModel: UserModel = UserModel
+    userModel: Type[UserModel] = UserModel
 
     def getAll(self) -> list[UserModel]:
         """Gets all users from the database.

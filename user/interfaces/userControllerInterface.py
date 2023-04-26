@@ -5,7 +5,7 @@ from .userServiceInterface import IUserService
 
 
 class IUserController:
-    userService: Type[IUserService]
+    userService: IUserService
 
     def get(self) -> Response:
         raise NotImplementedError
