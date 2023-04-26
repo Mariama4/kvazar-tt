@@ -57,4 +57,10 @@ class UserController(IUserController):
         return jsonify(user)
 
     def delete(self, id: int) -> Response:
-        ...
+        """Deletes a user with the specified ID from application.
+
+        :param id: The ID of the user to delete.
+        :return: Flask `Response` object containing the JSON representation of the result of the delete operation.
+        """
+        result = self.userService.delete(id)
+        return jsonify(result)
