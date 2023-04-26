@@ -90,4 +90,16 @@ class UserService(IUserService):
             return user
 
     def delete(self, id: int) -> bool:
-        pass
+        """Deletes a user with the specified ID from the database.
+
+        :param id: The ID of the user to delete.
+        :return: True if the user was successfully deleted.
+        """
+        user = self.userModel.query.get_or_404(id)
+        try:
+            db.session.delete(user)
+            db.session.commit()
+        except Exception:
+            abort(403, "Ошибка удаления пользователя")
+        else:
+            return True
