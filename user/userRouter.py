@@ -12,13 +12,13 @@ class UserRouter(IUserRouter):
     """
     userController: IUserController = UserController()
 
-    def __init__(self, app: Type[Flask], name: str) -> None:
+    def __init__(self, app: Flask, name: str) -> None:
         """Initializes the UserRouter instance.
 
         :param app: Flask instance representing the application.
         :param name: Name of the user resource, used in the endpoint URLs.
         """
-        self.app: Type[Flask] = app
+        self.app: Flask = app
         self.name: str = name
 
         self.app.add_url_rule(
