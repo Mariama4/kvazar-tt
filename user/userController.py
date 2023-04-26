@@ -1,7 +1,7 @@
 from flask import request, Response, jsonify
 
-from interfaces import IUserController
-from interfaces import IUserService
+from .interfaces import IUserController
+from .interfaces import IUserService
 from .userService import UserService
 
 
