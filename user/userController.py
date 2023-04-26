@@ -29,7 +29,13 @@ class UserController(IUserController):
         return jsonify(users)
 
     def create(self) -> Response:
-        ...
+        """Creates a new user in application.
+
+        :return: Flask `Response` object containing the JSON representation of the created user.
+        """
+        data = request.json
+        user = self.userService.create(data)
+        return jsonify(user)
 
     def getById(self, id: int) -> Response:
         ...
