@@ -7,7 +7,7 @@ from .userServiceInterface import IUserService
 class IUserController:
     userService: Type[IUserService]
 
-    def getAll(self) -> Response:
+    def get(self) -> Response:
         raise NotImplementedError
 
     def create(self) -> Response:

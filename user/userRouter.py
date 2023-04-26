@@ -23,7 +23,7 @@ class UserRouter(IUserRouter):
 
         self.app.add_url_rule(
             rule=f"/{self.name}/",
-            view_func=self.userController.getAll,
+            view_func=self.userController.get,
             methods=["GET"]
         )
 

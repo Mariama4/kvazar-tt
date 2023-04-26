@@ -13,7 +13,7 @@ class UserController(IUserController):
     """
     userService: IUserService = UserService()
 
-    def getAll(self) -> Response:
+    def get(self) -> Response:
         """Gets all users or paginated users from application.
 
         :return: Flask `Response` object containing the JSON representation of the users.
