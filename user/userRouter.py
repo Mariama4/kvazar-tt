@@ -34,13 +34,13 @@ class UserRouter(IUserRouter):
         )
 
         self.app.add_url_rule(
-            rule=f"/{name}/<int:id>",
+            rule=f"/{self.name}/<int:id>",
             view_func=self.userController.getById,
             methods=["GET"],
         )
 
         self.app.add_url_rule(
-            rule=f"/{name}/<int:id>",
+            rule=f"/{self.name}/<int:id>",
             view_func=self.userController.updateById,
             methods=["PATCH"],
         )
