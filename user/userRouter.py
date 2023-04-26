@@ -38,3 +38,9 @@ class UserRouter(IUserRouter):
             view_func=self.userController.getById,
             methods=["GET"],
         )
+
+        self.app.add_url_rule(
+            rule=f"/{name}/<int:id>",
+            view_func=self.userController.updateById,
+            methods=["PATCH"],
+        )
