@@ -1,4 +1,3 @@
-from typing import Type
 from flask import Flask
 from .userController import UserController
 from .interfaces import IUserRouter, IUserController

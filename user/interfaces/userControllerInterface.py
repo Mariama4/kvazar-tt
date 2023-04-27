@@ -1,5 +1,3 @@
-from typing import Type
-
 from flask import Response
 from .userServiceInterface import IUserService
 

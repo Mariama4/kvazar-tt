@@ -1,7 +1,5 @@
 from typing import Type
-
 from flask import abort
-
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserService
@@ -103,9 +101,9 @@ class UserService(IUserService):
             return True
 
     def getCountUsersForLastWeek(self) -> int:
-        """Getting users registered per week
+        """Getting users registered per week.
 
-        :return: Number of users registered per week
+        :return: Number of users registered per week.
         """
         try:
             countOfUsers = get_count_users_registered_last_week()
@@ -115,7 +113,7 @@ class UserService(IUserService):
             return countOfUsers
 
     def getTopLongestUsernames(self) -> list[UserModel]:
-        """Getting the top 5 users with the longest usernames
+        """Getting the top 5 users with the longest usernames.
 
         :return: List of `UserModel` objects representing top 5 users.
         """
@@ -127,7 +125,7 @@ class UserService(IUserService):
             return users
 
     def getDomainEmailRatio(self, domain: str) -> float:
-        """Getting users who have a similar domain in email
+        """Getting users who have a similar domain in email.
 
         :param domain: Email Domain (for example, "example.com").
         :return: The percentage of users who have a similar percentage among all.

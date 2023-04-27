@@ -1,5 +1,4 @@
 from flask import request, Response, jsonify
-
 from .interfaces import IUserController
 from .interfaces import IUserService
 from .userService import UserService
@@ -67,7 +66,7 @@ class UserController(IUserController):
         return jsonify(result)
 
     def getCountUsersForLastWeek(self) -> Response:
-        """ Getting users registered per week
+        """ Getting users registered per week.
 
         :return: Flask `Response` object containing the JSON representation of number users registered per week.
         """
@@ -77,7 +76,7 @@ class UserController(IUserController):
         })
 
     def getTopLongestUsernames(self) -> Response:
-        """Getting the top 5 users with the longest usernames
+        """Getting the top 5 users with the longest usernames.
 
         :return: Flask `Response` object containing the JSON representation list of the users.
         """
@@ -85,7 +84,7 @@ class UserController(IUserController):
         return jsonify(users)
 
     def getDomainEmailRatio(self, domain: str) -> Response:
-        """Getting users who have a similar domain in email
+        """Getting users who have a similar domain in email.
 
         :param domain: Email Domain (for example, "example.com").
         :return: Flask `Response` object containing the JSON representation of percentage users with similar domain.
