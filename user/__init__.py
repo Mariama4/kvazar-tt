@@ -1,3 +1,3 @@
 from .userModel import UserModel
 
-__all__ = ['UserModel']
+__all__ = ["UserModel"]

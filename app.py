@@ -13,19 +13,17 @@ with app.app_context():
     db.create_all()
 
 
-@app.route('/users/count_users_for_last_week', methods=['GET'])
+@app.route("/users/count_users_for_last_week", methods=["GET"])
 def handler_count_users_for_last_week() -> Response:
     """An endpoint that returns the number of users registered in the last week
 
     :return: Flask `Response` object containing the JSON representation of number users.
     """
     countOfUsers = get_count_users_registered_last_week(UserModel)
-    return jsonify({
-        "Count users": countOfUsers
-    })
+    return jsonify({"Count users": countOfUsers})
 
 
-@app.route('/users/top_longest_usernames', methods=['GET'])
+@app.route("/users/top_longest_usernames", methods=["GET"])
 def handler_top_longest_usernames() -> Response:
     """An endpoint that returns the top 5 users with the longest usernames
 
@@ -35,7 +33,7 @@ def handler_top_longest_usernames() -> Response:
     return jsonify(users)
 
 
-@app.route('/users/<string:domain>', methods=['GET'])
+@app.route("/users/<string:domain>", methods=["GET"])
 def handler_domain_email_ratio(domain: str) -> Response:
     """An endpoint that returns the percentage of users that have an identical domain among all users
 
@@ -43,10 +41,8 @@ def handler_domain_email_ratio(domain: str) -> Response:
     :return: Flask `Response` object containing the JSON representation of number users.
     """
     percent = get_domain_email_ratio(UserModel, domain)
-    return jsonify({
-        domain: percent
-    })
+    return jsonify({domain: percent})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
