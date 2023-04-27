@@ -1,7 +1,7 @@
 from flask import Flask
 
 from config import DevelopmentConfig, ProductionConfig
-from db import db
+from db import *
 from user import UserRouter
 
 app = Flask(__name__)
