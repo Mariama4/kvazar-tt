@@ -83,3 +83,12 @@ class UserController(IUserController):
         """
         users = self.userService.getTopLongestUsernames()
         return jsonify(users)
+
+    def getDomainEmailRatio(self, domain: str) -> Response:
+        """Getting users who have a similar domain in email
+
+        :param domain: Email Domain (for example, "example.com").
+        :return: Flask `Response` object containing the JSON representation of percentage users with similar domain.
+        """
+        percent = self.userService.getDomainEmailRatio(domain)
+        return jsonify({domain: percent})

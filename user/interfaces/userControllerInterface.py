@@ -27,3 +27,6 @@ class IUserController:
 
     def getTopLongestUsernames(self) -> Response:
         raise NotImplementedError
+
+    def getDomainEmailRatio(self, domain: str) -> Response:
+        raise NotImplementedError

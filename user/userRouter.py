@@ -61,3 +61,9 @@ class UserRouter(IUserRouter):
             view_func=self.userController.getTopLongestUsernames,
             methods=["GET"],
         )
+
+        self.app.add_url_rule(
+            rule=f"/{self.name}/domain_like/<string:domain>",
+            view_func=self.userController.getDomainEmailRatio,
+            methods=["GET"],
+        )

@@ -5,7 +5,7 @@ from flask import abort
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserService
-from .utils import get_count_users_registered_last_week, get_top_5_users_with_longest_names
+from .utils import get_count_users_registered_last_week, get_top_5_users_with_longest_names, get_domain_email_ratio
 
 
 class UserService(IUserService):
@@ -125,3 +125,16 @@ class UserService(IUserService):
             abort(403, "Ошибка отправки данных о топ 5 пользователей с самими длинными именами")
         else:
             return users
+
+    def getDomainEmailRatio(self, domain: str) -> float:
+        """Getting users who have a similar domain in email
+
+        :param domain: Email Domain (for example, "example.com").
+        :return: The percentage of users who have a similar percentage among all.
+        """
+        try:
+            percent = get_domain_email_ratio(domain)
+        except Exception:
+            abort(403, "Ошибка отправки данных о пользователях, у которых схожий домен")
+        else:
+            return percent

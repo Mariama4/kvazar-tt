@@ -29,3 +29,6 @@ class IUserService:
 
     def getTopLongestUsernames(self) -> list[UserModel]:
         raise NotImplementedError
+
+    def getDomainEmailRatio(self, domain: str) -> float:
+        raise NotImplementedError
