@@ -75,3 +75,11 @@ class UserController(IUserController):
         return jsonify({
             "Users": countOfUsers
         })
+
+    def getTopLongestUsernames(self) -> Response:
+        """Getting the top 5 users with the longest usernames
+
+        :return: Flask `Response` object containing the JSON representation list of the users.
+        """
+        users = self.userService.getTopLongestUsernames()
+        return jsonify(users)

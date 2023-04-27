@@ -55,3 +55,9 @@ class UserRouter(IUserRouter):
             view_func=self.userController.getCountUsersForLastWeek,
             methods=["GET"],
         )
+
+        self.app.add_url_rule(
+            rule=f"/{self.name}/top_longest_usernames",
+            view_func=self.userController.getTopLongestUsernames,
+            methods=["GET"],
+        )

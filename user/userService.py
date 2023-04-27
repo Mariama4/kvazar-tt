@@ -5,7 +5,7 @@ from flask import abort
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserService
-from .utils import get_count_users_registered_last_week
+from .utils import get_count_users_registered_last_week, get_top_5_users_with_longest_names
 
 
 class UserService(IUserService):
@@ -113,3 +113,15 @@ class UserService(IUserService):
             abort(403, "Ошибка отправки данных о количестве пользователей за последнюю неделю")
         else:
             return countOfUsers
+
+    def getTopLongestUsernames(self) -> list[UserModel]:
+        """Getting the top 5 users with the longest usernames
+
+        :return: List of `UserModel` objects representing top 5 users.
+        """
+        try:
+            users = get_top_5_users_with_longest_names()
+        except Exception:
+            abort(403, "Ошибка отправки данных о топ 5 пользователей с самими длинными именами")
+        else:
+            return users

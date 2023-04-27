@@ -24,3 +24,6 @@ class IUserController:
 
     def getCountUsersForLastWeek(self) -> Response:
         raise NotImplementedError
+
+    def getTopLongestUsernames(self) -> Response:
+        raise NotImplementedError

@@ -26,3 +26,6 @@ class IUserService:
 
     def getCountUsersForLastWeek(self) -> int:
         raise NotImplementedError
+
+    def getTopLongestUsernames(self) -> list[UserModel]:
+        raise NotImplementedError
