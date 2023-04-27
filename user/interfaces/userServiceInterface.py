@@ -23,3 +23,6 @@ class IUserService:
 
     def delete(self, id: int) -> bool:
         raise NotImplementedError
+
+    def getCountUsersForLastWeek(self) -> int:
+        raise NotImplementedError

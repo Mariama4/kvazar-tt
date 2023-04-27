@@ -49,3 +49,9 @@ class UserRouter(IUserRouter):
             view_func=self.userController.delete,
             methods=["DELETE"],
         )
+
+        self.app.add_url_rule(
+            rule=f"/{self.name}/count_users_for_last_week",
+            view_func=self.userController.getCountUsersForLastWeek,
+            methods=["GET"],
+        )

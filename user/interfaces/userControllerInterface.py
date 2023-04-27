@@ -21,3 +21,6 @@ class IUserController:
 
     def delete(self, id: int) -> Response:
         raise NotImplementedError
+
+    def getCountUsersForLastWeek(self) -> Response:
+        raise NotImplementedError

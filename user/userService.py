@@ -5,6 +5,7 @@ from flask import abort
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserService
+from .utils import get_count_users_registered_last_week
 
 
 class UserService(IUserService):
@@ -100,3 +101,15 @@ class UserService(IUserService):
             abort(403, "Ошибка удаления пользователя")
         else:
             return True
+
+    def getCountUsersForLastWeek(self) -> int:
+        """Getting users registered per week
+
+        :return: Number of users registered per week
+        """
+        try:
+            countOfUsers = get_count_users_registered_last_week()
+        except Exception:
+            abort(403, "Ошибка отправки данных о количестве пользователей за последнюю неделю")
+        else:
+            return countOfUsers

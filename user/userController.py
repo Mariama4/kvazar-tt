@@ -65,3 +65,13 @@ class UserController(IUserController):
         """
         result = self.userService.delete(id)
         return jsonify(result)
+
+    def getCountUsersForLastWeek(self) -> Response:
+        """ Getting users registered per week
+
+        :return: Flask `Response` object containing the JSON representation of number users registered per week.
+        """
+        countOfUsers = self.userService.getCountUsersForLastWeek()
+        return jsonify({
+            "Users": countOfUsers
+        })
