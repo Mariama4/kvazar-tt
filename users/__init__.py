@@ -10,7 +10,7 @@ __all__ = ['users_app']
 
 userController: IUserController = UserController()
 
-URL_PREFIX: Final = '/users'
+URL_PREFIX: Final = '/api/users'
 
 users_app = Blueprint(
     'users_app',
