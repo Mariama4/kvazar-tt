@@ -1,5 +1,3 @@
-from typing import Type
-
 from flask import Response
 from .userServiceInterface import IUserService
 
@@ -7,7 +5,7 @@ from .userServiceInterface import IUserService
 class IUserController:
     userService: IUserService
 
-    def get(self) -> Response:
+    def getUsers(self) -> Response:
         raise NotImplementedError
 
     def create(self) -> Response:
@@ -20,4 +18,7 @@ class IUserController:
         raise NotImplementedError
 
     def delete(self, id: int) -> Response:
+        raise NotImplementedError
+
+    def getPaginatedUsers(self) -> Response:
         raise NotImplementedError

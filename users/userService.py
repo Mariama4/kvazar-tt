@@ -1,7 +1,6 @@
+from datetime import datetime, timedelta
 from typing import Type
-
 from flask import abort
-
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserService
@@ -75,7 +74,7 @@ class UserService(IUserService):
         :param data: Dict containing the updated data for the user.
         :return: The `UserModel` object representing the updated user.
         """
-        user = self.userModel.query.get_or_404(id)
+        user = self.userModel.query.get_or_404(id, description="Такого пользователя нет")
         try:
             user.username = data["username"]
             user.email = data["email"]
