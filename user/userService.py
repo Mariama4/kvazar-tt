@@ -74,7 +74,7 @@ class UserService(IUserService):
         :param data: Dict containing the updated data for the user.
         :return: The `UserModel` object representing the updated user.
         """
-        user = self.userModel.query.get_or_404(id)
+        user = self.userModel.query.get_or_404(id, description="Такого пользователя нет")
         try:
             user.username = data["username"]
             user.email = data["email"]
