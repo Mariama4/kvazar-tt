@@ -19,6 +19,7 @@
 **С использованием следующих библиотек:**
 * Flask-SQLAlchemy 3.0.x
 * python-dotenv
+* flask-swagger-ui
 
 ## Запуск проекта
 
