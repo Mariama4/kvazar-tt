@@ -75,5 +75,5 @@ users_app.add_url_rule(
 users_app.add_url_rule(
     rule=f"/info",
     view_func=userController.getUsersInfo,
-    methods=["GET"],
+    methods=["POST"],
 )
