@@ -31,7 +31,7 @@ users_app.add_url_rule(
 )
 
 users_app.add_url_rule(
-    rule=f"/",
+    rule=f"",
     view_func=userController.create,
     methods=["POST"],
 )
