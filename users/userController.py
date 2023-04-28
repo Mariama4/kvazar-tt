@@ -69,7 +69,7 @@ class UserController(IUserController):
         :return: Flask `Response` object containing the JSON representation of the result of the delete operation.
         """
         result = self.userService.delete(id)
-        return jsonify(result)
+        return jsonify({'deleted': result})
 
     def getCountUsersForLastWeek(self) -> Response:
         """ Getting users registered per week.
