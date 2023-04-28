@@ -28,3 +28,6 @@ class IUserController:
 
     def getDomainEmailRatio(self, domain: str) -> Response:
         raise NotImplementedError
+
+    def getUsersInfo(self) -> Response:
+        raise NotImplementedError

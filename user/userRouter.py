@@ -66,3 +66,9 @@ class UserRouter(IUserRouter):
             view_func=self.userController.getDomainEmailRatio,
             methods=["GET"],
         )
+
+        self.app.add_url_rule(
+            rule=f"/{self.name}/info",
+            view_func=self.userController.getUsersInfo,
+            methods=["GET"],
+        )

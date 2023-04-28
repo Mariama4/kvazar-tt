@@ -23,7 +23,7 @@ class IUserService:
     def delete(self, id: int) -> bool:
         raise NotImplementedError
 
-    def getCountUsersForLastWeek(self) -> int:
+    def getCountUsersRegisteredLastWeek(self) -> int:
         raise NotImplementedError
 
     def getTopLongestUsernames(self) -> list[UserModel]:

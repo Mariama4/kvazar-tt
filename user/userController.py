@@ -1,4 +1,4 @@
-from flask import request, Response, jsonify
+from flask import request, Response, jsonify, abort
 from .interfaces import IUserController
 from .interfaces import IUserService
 from .userService import UserService
@@ -70,7 +70,7 @@ class UserController(IUserController):
 
         :return: Flask `Response` object containing the JSON representation of number users registered per week.
         """
-        countOfUsers = self.userService.getCountUsersForLastWeek()
+        countOfUsers = self.userService.getCountUsersRegisteredLastWeek()
         return jsonify({
             "Users": countOfUsers
         })
@@ -91,3 +91,30 @@ class UserController(IUserController):
         """
         percent = self.userService.getDomainEmailRatio(domain)
         return jsonify({domain: percent})
+
+    def getUsersInfo(self) -> Response:
+        """Getting information about users:
+            - Number of users registered in the last week;
+            - Top 5 users with the longest usernames;
+            - Percentage of users who have an identical domain.
+
+        :return: A Flask `Response` object containing a JSON representation of the data:\
+            "countUsersForWeek": countOfUsers,\
+            `domain`: percentOfUsers,\
+            "topUsersWithLongestUsernames": topUsersWithLongestUsernames
+        """
+
+        data = request.json
+        if not (data['domain']):
+            raise abort(400, 'Нет параметра `domain`')
+        domain = data['domain']
+
+        countOfUsers = self.userService.getCountUsersRegisteredLastWeek()
+        topUsersWithLongestUsernames = self.userService.getTopLongestUsernames()
+        percentOfUsers = self.userService.getDomainEmailRatio(domain)
+
+        return jsonify({
+            "countUsersForWeek": countOfUsers,
+            domain: percentOfUsers,
+            "topUsersWithLongestUsernames": topUsersWithLongestUsernames
+        })

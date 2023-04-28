@@ -1,9 +1,9 @@
+from datetime import datetime, timedelta
 from typing import Type
 from flask import abort
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserService
-from .utils import get_count_users_registered_last_week, get_top_5_users_with_longest_names, get_domain_email_ratio
 
 
 class UserService(IUserService):
@@ -100,17 +100,20 @@ class UserService(IUserService):
         else:
             return True
 
-    def getCountUsersForLastWeek(self) -> int:
+    def getCountUsersRegisteredLastWeek(self) -> int:
         """Getting users registered per week.
 
         :return: Number of users registered per week.
         """
         try:
-            countOfUsers = get_count_users_registered_last_week()
+            last_week = datetime.utcnow() - timedelta(days=7)
+            users = self.userModel.query.filter(
+                self.userModel.registration_date >= last_week
+            ).all()
         except Exception:
             abort(403, "Ошибка отправки данных о количестве пользователей за последнюю неделю")
         else:
-            return countOfUsers
+            return len(users)
 
     def getTopLongestUsernames(self) -> list[UserModel]:
         """Getting the top 5 users with the longest usernames.
@@ -118,7 +121,7 @@ class UserService(IUserService):
         :return: List of `UserModel` objects representing top 5 users.
         """
         try:
-            users = get_top_5_users_with_longest_names()
+            users = self.userModel.query.order_by(self.userModel.username.desc()).limit(5).all()
         except Exception:
             abort(403, "Ошибка отправки данных о топ 5 пользователей с самими длинными именами")
         else:
@@ -131,7 +134,12 @@ class UserService(IUserService):
         :return: The percentage of users who have a similar percentage among all.
         """
         try:
-            percent = get_domain_email_ratio(domain)
+            total_users = self.userModel.query.count()
+            domain_users = self.userModel.query.filter(self.userModel.email.like(f"%@{domain}")).count()
+            if total_users == 0:
+                percent = 0.0
+            else:
+                percent = round((domain_users / total_users) * 100, 2)
         except Exception:
             abort(403, "Ошибка отправки данных о пользователях, у которых схожий домен")
         else:
