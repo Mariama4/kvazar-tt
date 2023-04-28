@@ -121,6 +121,9 @@ class UserController(IUserController):
 
         return jsonify({
             "countUsersForWeek": countOfUsers,
-            domain: percentOfUsers,
+            "percentOfDomain": {
+                "domain": domain,
+                "percent": percentOfUsers,
+            },
             "topUsersWithLongestUsernames": topUsersWithLongestUsernames
         })
