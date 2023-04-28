@@ -13,19 +13,25 @@ class UserController(IUserController):
 
     userService: IUserService = UserService()
 
-    def get(self) -> Response:
-        """Gets all users or paginated users from application.
+    def getUsers(self) -> Response:
+        """Gets all users from application.
+
+        :return: Flask `Response` object containing the JSON representation of the users.
+        """
+        users = self.userService.getAll()
+        return jsonify(users)
+
+    def getPaginatedUsers(self) -> Response:
+        """Getting users with pagination
 
         :return: Flask `Response` object containing the JSON representation of the users.
         """
         page = request.args.get("page", None, type=int)
         per_page = request.args.get("per_page", None, type=int)
-
         if page is None or per_page is None:
-            users = self.userService.getAll()
-        else:
-            users = self.userService.getPaginatedUsers(page, per_page)
+            abort(400, "Не переданы значения.")
 
+        users = self.userService.getPaginatedUsers(page, per_page)
         return jsonify(users)
 
     def create(self) -> Response:

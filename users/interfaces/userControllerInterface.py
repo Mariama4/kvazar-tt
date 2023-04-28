@@ -5,7 +5,7 @@ from .userServiceInterface import IUserService
 class IUserController:
     userService: IUserService
 
-    def get(self) -> Response:
+    def getUsers(self) -> Response:
         raise NotImplementedError
 
     def create(self) -> Response:
@@ -30,4 +30,7 @@ class IUserController:
         raise NotImplementedError
 
     def getUsersInfo(self) -> Response:
+        raise NotImplementedError
+
+    def getPaginatedUsers(self) -> Response:
         raise NotImplementedError
