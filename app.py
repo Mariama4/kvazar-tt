@@ -1,7 +1,7 @@
 from flask import Flask
 from db import db
 from config import DevelopmentConfig, ProductionConfig
-from user import *
+from users import *
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig if app.config["DEBUG"] else ProductionConfig)
