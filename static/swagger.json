@@ -147,7 +147,7 @@
         "tags": [
           "users"
         ],
-        "summary": "Получение польльзователя по id",
+        "summary": "Получение пользователя по id",
         "parameters": [
           {
             "in": "path",
