@@ -45,8 +45,8 @@ class UserController(IUserController):
         return jsonify({"deleted": result})
 
     def getCountUsersForLastWeek(self) -> Response:
-        countOfUsers = self.userService.getCountUsersRegisteredLastWeek()
-        return jsonify({"Users": countOfUsers})
+        count_of_users = self.userService.getCountUsersRegisteredLastWeek()
+        return jsonify({"Users": count_of_users})
 
     def getTopLongestUsernames(self) -> Response:
         users = self.userService.getTopLongestUsernames()
@@ -62,17 +62,17 @@ class UserController(IUserController):
             raise abort(400, "Нет параметра `domain`")
         domain = data["domain"]
 
-        countOfUsers = self.userService.getCountUsersRegisteredLastWeek()
-        topUsersWithLongestUsernames = self.userService.getTopLongestUsernames()
-        percentOfUsers = self.userService.getDomainEmailRatio(domain)
+        count_of_users = self.userService.getCountUsersRegisteredLastWeek()
+        top_users_with_longest_usernames = self.userService.getTopLongestUsernames()
+        percent_of_users = self.userService.getDomainEmailRatio(domain)
 
         return jsonify(
             {
-                "countUsersForWeek": countOfUsers,
+                "countUsersForWeek": count_of_users,
                 "percentOfDomain": {
                     "domain": domain,
-                    "percent": percentOfUsers,
+                    "percent": percent_of_users,
                 },
-                "topUsersWithLongestUsernames": topUsersWithLongestUsernames,
+                "topUsersWithLongestUsernames": top_users_with_longest_usernames,
             }
         )
