@@ -6,28 +6,18 @@ from .interfaces import IUserController
 from .userModel import UserModel
 from .userController import UserController
 
-__all__ = ['users_app']
+__all__ = ["users_app"]
 
 userController: IUserController = UserController()
 
-URL_PREFIX: Final = '/api/users'
+URL_PREFIX: Final = "/api/users"
 
-users_app = Blueprint(
-    'users_app',
-    __name__,
-    url_prefix=URL_PREFIX
-)
+users_app = Blueprint("users_app", __name__, url_prefix=URL_PREFIX)
+
+users_app.add_url_rule(rule=f"/", view_func=userController.getUsers, methods=["GET"])
 
 users_app.add_url_rule(
-    rule=f"/",
-    view_func=userController.getUsers,
-    methods=["GET"]
-)
-
-users_app.add_url_rule(
-    rule=f"",
-    view_func=userController.getPaginatedUsers,
-    methods=["GET"]
+    rule=f"", view_func=userController.getPaginatedUsers, methods=["GET"]
 )
 
 users_app.add_url_rule(
