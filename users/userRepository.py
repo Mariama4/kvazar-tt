@@ -19,7 +19,7 @@ class UserRepository(IUserRepository):
 
     def getAll(self) -> list[UserModel]:
         try:
-            users = self.userModel.query.all()
+            users: list[UserModel] = self.userModel.query.all()
         except Exception:
             abort(403, "Ошибка отправки пользователей.")
         else:
@@ -28,7 +28,7 @@ class UserRepository(IUserRepository):
     def getPaginatedUsers(self, page: int, per_page: int) -> list[UserModel]:
         users_query = self.userModel.query.paginate(page=page, per_page=per_page)
         try:
-            users = users_query.items
+            users: list[UserModel] = users_query.items
         except Exception:
             abort(403, "Ошибка отправки пользователей")
         else:
@@ -46,13 +46,13 @@ class UserRepository(IUserRepository):
             return user
 
     def getById(self, id: int) -> UserModel:
-        user = self.userModel.query.get_or_404(
+        user: UserModel = self.userModel.query.get_or_404(
             id, description="Такого пользователя нет"
         )
         return user
 
     def updateById(self, id: int, data: UpdateUserDto) -> UserModel:
-        user = self.userModel.query.get_or_404(
+        user: UserModel = self.userModel.query.get_or_404(
             id, description="Такого пользователя нет"
         )
         try:
@@ -66,7 +66,7 @@ class UserRepository(IUserRepository):
             return user
 
     def delete(self, id: int) -> bool:
-        user = self.userModel.query.get_or_404(
+        user: UserModel = self.userModel.query.get_or_404(
             id, description="Такого пользователя нет"
         )
         try:
@@ -80,7 +80,7 @@ class UserRepository(IUserRepository):
     def getCountUsersRegisteredLastWeek(self) -> int:
         try:
             last_week = datetime.utcnow() - timedelta(days=7)
-            users = self.userModel.query.filter(
+            users: list[UserModel] = self.userModel.query.filter(
                 self.userModel.registration_date >= last_week
             ).all()
         except Exception:
@@ -93,7 +93,7 @@ class UserRepository(IUserRepository):
 
     def getTopLongestUsernames(self) -> list[UserModel]:
         try:
-            users = (
+            users: list[UserModel] = (
                 self.userModel.query.order_by(self.userModel.username.desc())
                 .limit(5)
                 .all()
@@ -108,8 +108,8 @@ class UserRepository(IUserRepository):
 
     def getDomainEmailRatio(self, domain: str) -> float:
         try:
-            total_users = self.userModel.query.count()
-            domain_users = self.userModel.query.filter(
+            total_users: int = self.userModel.query.count()
+            domain_users: int = self.userModel.query.filter(
                 self.userModel.email.like(f"%@{domain}")
             ).count()
             if total_users == 0:
