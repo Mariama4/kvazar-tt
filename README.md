@@ -23,7 +23,7 @@
 
 **TODO:**
 
-* Добавить слой Repository к Users
+* Добавить слой Repository к Users (И рефакторинг остальных слоев, чтобы структура была верной)
 * Улучшить качество docstring, type hinting
 
 **Документация к API выполнена на swagger по стандарту openapi 3.0.0**
