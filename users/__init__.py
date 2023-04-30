@@ -45,24 +45,6 @@ users_app.add_url_rule(
 )
 
 users_app.add_url_rule(
-    rule=f"/count_users_for_last_week",
-    view_func=userController.getCountUsersForLastWeek,
-    methods=["GET"],
-)
-
-users_app.add_url_rule(
-    rule=f"/top_longest_usernames",
-    view_func=userController.getTopLongestUsernames,
-    methods=["GET"],
-)
-
-users_app.add_url_rule(
-    rule=f"/domain_like/<string:domain>",
-    view_func=userController.getDomainEmailRatio,
-    methods=["GET"],
-)
-
-users_app.add_url_rule(
     rule=f"/info",
     view_func=userController.getUsersInfo,
     methods=["POST"],

@@ -44,18 +44,6 @@ class UserController(IUserController):
         result = self.userService.delete(id)
         return jsonify({"deleted": result})
 
-    def getCountUsersForLastWeek(self) -> Response:
-        count_of_users = self.userService.getCountUsersRegisteredLastWeek()
-        return jsonify({"Users": count_of_users})
-
-    def getTopLongestUsernames(self) -> Response:
-        users = self.userService.getTopLongestUsernames()
-        return jsonify(users)
-
-    def getDomainEmailRatio(self, domain: str) -> Response:
-        percent = self.userService.getDomainEmailRatio(domain)
-        return jsonify({domain: percent})
-
     def getUsersInfo(self) -> Response:
         data = request.json
         if not (data["domain"]):

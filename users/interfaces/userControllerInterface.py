@@ -58,31 +58,6 @@ class IUserController(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def getCountUsersForLastWeek(self) -> Response:
-        """Getting users registered per week.
-
-        :return: Flask `Response` object containing the JSON representation of number users registered per week.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def getTopLongestUsernames(self) -> Response:
-        """Getting the top 5 users with the longest usernames.
-
-        :return: Flask `Response` object containing the JSON representation list of the users.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def getDomainEmailRatio(self, domain: str) -> Response:
-        """Getting users who have a similar domain in email.
-
-        :param domain: Email Domain (for example, "example.com").
-        :return: Flask `Response` object containing the JSON representation of percentage users with similar domain.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
     def getUsersInfo(self) -> Response:
         """Getting information about users:
             - Number of users registered in the last week;
