@@ -21,6 +21,11 @@
 * python-dotenv
 * flask-swagger-ui
 
+**TODO:**
+
+* Добавить слой Repository к Users
+* Улучшить качество docstring, type hinting
+
 **Документация к API выполнена на swagger по стандарту openapi 3.0.0**
 
 ## Запуск проекта
