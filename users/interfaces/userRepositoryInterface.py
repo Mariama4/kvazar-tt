@@ -1,14 +1,14 @@
-from ..userModel import UserModel
-from .userRepositoryInterface import IUserRepository
 from abc import ABC, abstractmethod
+from typing import Type
+from ..userModel import UserModel
 
 
-class IUserService(ABC):
-    userRepository: IUserRepository
+class IUserRepository(ABC):
+    userModel: Type[UserModel]
 
     @abstractmethod
     def getAll(self) -> list[UserModel]:
-        """Gets all users from the user repository.
+        """Gets all users from the database.
 
         :return: List of `UserModel` objects representing the users.
         """
@@ -16,7 +16,7 @@ class IUserService(ABC):
 
     @abstractmethod
     def getPaginatedUsers(self, page: int, per_page: int) -> list[UserModel]:
-        """Gets paginated users from the user repository.
+        """Gets paginated users from the database.
 
         :param page: The page number of the paginated users.
         :param per_page: The number of users per page in the paginated results.
@@ -26,7 +26,7 @@ class IUserService(ABC):
 
     @abstractmethod
     def create(self, data: UserModel) -> UserModel:
-        """Creates a new user in the user repository.
+        """Creates a new user in the database.
 
         :param data: Dict containing the data for the new user.
         :return: The `UserModel` object representing the created user.
@@ -35,7 +35,7 @@ class IUserService(ABC):
 
     @abstractmethod
     def getById(self, id: int) -> UserModel:
-        """Gets a user with the specified ID from the user repository.
+        """Gets a user with the specified ID from the database.
 
         :param id: The ID of the user to retrieve.
         :return: The `UserModel` object representing the retrieved user.
@@ -44,7 +44,7 @@ class IUserService(ABC):
 
     @abstractmethod
     def updateById(self, id: int, data: UserModel) -> UserModel:
-        """Updates a user with the specified ID in the user repository.
+        """Updates a user with the specified ID in the database.
 
         :param id: The ID of the user to update.
         :param data: Dict containing the updated data for the user.
@@ -53,7 +53,7 @@ class IUserService(ABC):
         raise NotImplementedError
 
     def delete(self, id: int) -> bool:
-        """Deletes a user with the specified ID from the user repository.
+        """Deletes a user with the specified ID from the database.
 
         :param id: The ID of the user to delete.
         :return: True if the user was successfully deleted.
