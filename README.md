@@ -345,5 +345,5 @@ per_page: integer
 "id": integer
 "username": string
 "email": string
-"registration_date": string
+"registration_date": datetime
 ```
