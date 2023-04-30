@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Type
 from ..userModel import UserModel
+from ..dto import CreateUserDto
+from ..dto import UpdateUserDto
 
 
 class IUserRepository(ABC):
@@ -25,7 +27,7 @@ class IUserRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def create(self, data: UserModel) -> UserModel:
+    def create(self, data: CreateUserDto) -> UserModel:
         """Creates a new user in the database.
 
         :param data: Dict containing the data for the new user.
@@ -43,7 +45,7 @@ class IUserRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def updateById(self, id: int, data: UserModel) -> UserModel:
+    def updateById(self, id: int, data: UpdateUserDto) -> UserModel:
         """Updates a user with the specified ID in the database.
 
         :param id: The ID of the user to update.
@@ -52,6 +54,7 @@ class IUserRepository(ABC):
         """
         raise NotImplementedError
 
+    @abstractmethod
     def delete(self, id: int) -> bool:
         """Deletes a user with the specified ID from the database.
 

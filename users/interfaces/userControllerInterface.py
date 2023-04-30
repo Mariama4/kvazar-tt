@@ -31,28 +31,28 @@ class IUserController(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def getById(self, id: int) -> Response:
+    def getById(self, user_id: int) -> Response:
         """Gets a user with the specified ID from the application.
 
-        :param id: The ID the user to retrieve.
+        :param user_id: The ID the user to retrieve.
         :return: Flask `Response` object containing the JSON representation of the retrieved user.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def updateById(self, id: int) -> Response:
+    def updateById(self, user_id: int) -> Response:
         """Updates a user with the specified ID in application.
 
-        :param id: The ID of the user to update.
+        :param user_id: The ID of the user to update.
         :return: Flask `Response` object containing the JSON representation of the updated user.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, id: int) -> Response:
+    def delete(self, user_id: int) -> Response:
         """Deletes a user with the specified ID from application.
 
-        :param id: The ID of the user to delete.
+        :param user_id: The ID of the user to delete.
         :return: Flask `Response` object containing the JSON representation of the result of the delete operation.
         """
         raise NotImplementedError

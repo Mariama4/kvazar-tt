@@ -1,16 +1,18 @@
 from datetime import datetime, timedelta
 from typing import Type
 from flask import abort
+
+from .dto import CreateUserDto, UpdateUserDto
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserRepository
 
 
 class UserRepository(IUserRepository):
-    """Represents a service for the user resource in application.
+    """Represents a repository for the user resource in database.
 
     Attributes:
-        userModel: Class representing the user model in application.
+        userModel: Class representing the user model in database.
     """
 
     userModel: Type[UserModel] = UserModel
@@ -32,7 +34,7 @@ class UserRepository(IUserRepository):
         else:
             return users
 
-    def create(self, data: UserModel) -> UserModel:
+    def create(self, data: CreateUserDto) -> UserModel:
         try:
             user = self.userModel(username=data["username"], email=data["email"])
 
@@ -44,10 +46,12 @@ class UserRepository(IUserRepository):
             return user
 
     def getById(self, id: int) -> UserModel:
-        user = self.userModel.query.get_or_404(id)
+        user = self.userModel.query.get_or_404(
+            id, description="Такого пользователя нет"
+        )
         return user
 
-    def updateById(self, id: int, data: UserModel) -> UserModel:
+    def updateById(self, id: int, data: UpdateUserDto) -> UserModel:
         user = self.userModel.query.get_or_404(
             id, description="Такого пользователя нет"
         )
@@ -62,7 +66,9 @@ class UserRepository(IUserRepository):
             return user
 
     def delete(self, id: int) -> bool:
-        user = self.userModel.query.get_or_404(id)
+        user = self.userModel.query.get_or_404(
+            id, description="Такого пользователя нет"
+        )
         try:
             db.session.delete(user)
             db.session.commit()
