@@ -7,7 +7,7 @@ from .interfaces import IUserRepository
 
 
 class UserRepository(IUserRepository):
-    """Represents a service for the user resource in application.
+    """Represents a repository for the user resource in application.
 
     Attributes:
         userModel: Class representing the user model in application.
