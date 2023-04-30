@@ -18,7 +18,9 @@ class UserService(IUserService):
         return users
 
     def getPaginatedUsers(self, page: int, per_page: int) -> list[UserModel]:
-        users: list[UserModel] = self.userRepository.getPaginatedUsers(page=page, per_page=per_page)
+        users: list[UserModel] = self.userRepository.getPaginatedUsers(
+            page=page, per_page=per_page
+        )
         return users
 
     def create(self, data: CreateUserDto) -> UserModel:

@@ -26,7 +26,9 @@ class UserController(IUserController):
         if page is None or per_page is None:
             abort(400, "Не переданы значения.")
 
-        users: list[UserModel] = self.userService.getPaginatedUsers(page=page, per_page=per_page)
+        users: list[UserModel] = self.userService.getPaginatedUsers(
+            page=page, per_page=per_page
+        )
         return jsonify(users)
 
     def create(self) -> Response:
