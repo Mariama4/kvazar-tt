@@ -28,15 +28,15 @@ class UserService(IUserService):
         return user
 
     def getById(self, user_id: int) -> UserModel:
-        user: UserModel = self.userRepository.getById(user_id=user_id)
+        user: UserModel = self.userRepository.getById(id=user_id)
         return user
 
     def updateById(self, user_id: int, data: UpdateUserDto) -> UserModel:
-        user: UserModel = self.userRepository.updateById(user_id=user_id, data=data)
+        user: UserModel = self.userRepository.updateById(id=user_id, data=data)
         return user
 
     def delete(self, user_id: int) -> bool:
-        isDeleted: bool = self.userRepository.delete(user_id=user_id)
+        isDeleted: bool = self.userRepository.delete(id=user_id)
         return isDeleted
 
     def getUserInfo(self, domain: str) -> InfoUsersDto:

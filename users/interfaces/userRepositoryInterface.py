@@ -36,29 +36,29 @@ class IUserRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def getById(self, user_id: int) -> UserModel:
+    def getById(self, id: int) -> UserModel:
         """Gets a user with the specified ID from the database.
 
-        :param user_id: The ID of the user to retrieve.
+        :param id: The ID of the user to retrieve.
         :return: The `UserModel` object representing the retrieved user.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def updateById(self, user_id: int, data: UpdateUserDto) -> UserModel:
+    def updateById(self, id: int, data: UpdateUserDto) -> UserModel:
         """Updates a user with the specified ID in the database.
 
-        :param user_id: The ID of the user to update.
+        :param id: The ID of the user to update.
         :param data: Dict containing the updated data for the user.
         :return: The `UserModel` object representing the updated user.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, user_id: int) -> bool:
+    def delete(self, id: int) -> bool:
         """Deletes a user with the specified ID from the database.
 
-        :param user_id: The ID of the user to delete.
+        :param id: The ID of the user to delete.
         :return: True if the user was successfully deleted.
         """
         raise NotImplementedError

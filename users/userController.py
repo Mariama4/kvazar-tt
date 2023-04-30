@@ -33,20 +33,20 @@ class UserController(IUserController):
 
     def create(self) -> Response:
         data: CreateUserDto = request.json
-        user: UserModel = self.userService.create(data)
+        user: UserModel = self.userService.create(data=data)
         return jsonify(user)
 
-    def getById(self, user_id: int) -> Response:
-        user: UserModel = self.userService.getById(user_id=user_id)
+    def getById(self, id: int = None) -> Response:
+        user: UserModel = self.userService.getById(user_id=id)
         return jsonify(user)
 
-    def updateById(self, user_id: int) -> Response:
+    def updateById(self, id: int = None) -> Response:
         data: UpdateUserDto = request.json
-        user: UserModel = self.userService.updateById(user_id=user_id, data=data)
+        user: UserModel = self.userService.updateById(user_id=id, data=data)
         return jsonify(user)
 
-    def delete(self, user_id: int) -> Response:
-        result = self.userService.delete(user_id)
+    def delete(self, id: int = None) -> Response:
+        result = self.userService.delete(user_id=id)
         return jsonify({"deleted": result})
 
     def getUsersInfo(self) -> Response:

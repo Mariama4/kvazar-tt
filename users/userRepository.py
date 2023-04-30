@@ -45,15 +45,15 @@ class UserRepository(IUserRepository):
         else:
             return user
 
-    def getById(self, user_id: int) -> UserModel:
+    def getById(self, id: int) -> UserModel:
         user = self.userModel.query.get_or_404(
-            user_id, description="Такого пользователя нет"
+            id, description="Такого пользователя нет"
         )
         return user
 
-    def updateById(self, user_id: int, data: UpdateUserDto) -> UserModel:
+    def updateById(self, id: int, data: UpdateUserDto) -> UserModel:
         user = self.userModel.query.get_or_404(
-            user_id, description="Такого пользователя нет"
+            id, description="Такого пользователя нет"
         )
         try:
             user.username = data["username"]
@@ -65,9 +65,9 @@ class UserRepository(IUserRepository):
         else:
             return user
 
-    def delete(self, user_id: int) -> bool:
+    def delete(self, id: int) -> bool:
         user = self.userModel.query.get_or_404(
-            user_id, description="Такого пользователя нет"
+            id, description="Такого пользователя нет"
         )
         try:
             db.session.delete(user)
