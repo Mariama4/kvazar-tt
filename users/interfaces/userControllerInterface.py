@@ -1,5 +1,5 @@
 from flask import Response
-from . import IUserService
+from .userServiceInterface import IUserService
 from abc import ABC, abstractmethod
 
 
