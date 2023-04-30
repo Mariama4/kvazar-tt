@@ -49,18 +49,5 @@ class UserController(IUserController):
         if not (data["domain"]):
             raise abort(400, "Нет параметра `domain`")
         domain = data["domain"]
-
-        count_of_users = self.userService.getCountUsersRegisteredLastWeek()
-        top_users_with_longest_usernames = self.userService.getTopLongestUsernames()
-        percent_of_users = self.userService.getDomainEmailRatio(domain)
-
-        return jsonify(
-            {
-                "countUsersForWeek": count_of_users,
-                "percentOfDomain": {
-                    "domain": domain,
-                    "percent": percent_of_users,
-                },
-                "topUsersWithLongestUsernames": top_users_with_longest_usernames,
-            }
-        )
+        users_info = self.userService.getUserInfo(domain)
+        return jsonify(users_info)

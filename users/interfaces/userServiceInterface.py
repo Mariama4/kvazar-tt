@@ -52,6 +52,7 @@ class IUserService(ABC):
         """
         raise NotImplementedError
 
+    @abstractmethod
     def delete(self, id: int) -> bool:
         """Deletes a user with the specified ID from the user repository.
 
@@ -61,26 +62,13 @@ class IUserService(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def getCountUsersRegisteredLastWeek(self) -> int:
-        """Getting users registered per week.
+    def getUserInfo(self, data) -> dict:
+        """Getting information about users:
+            - Number of users registered in the last week;
+            - Top 5 users with the longest usernames;
+            - Percentage of users who have an identical domain.
 
-        :return: Number of users registered per week.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def getTopLongestUsernames(self) -> list[UserModel]:
-        """Getting the top 5 users with the longest usernames.
-
-        :return: List of `UserModel` objects representing top 5 users.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def getDomainEmailRatio(self, domain: str) -> float:
-        """Getting users who have a similar domain in email.
-
-        :param domain: Email Domain (for example, "example.com").
-        :return: The percentage of users who have a similar percentage among all.
+        :param data: JSON object that contains the domain field
+        :return: return a dict
         """
         raise NotImplementedError

@@ -36,14 +36,16 @@ class UserService(IUserService):
         isDeleted = self.userRepository.delete(id)
         return isDeleted
 
-    def getCountUsersRegisteredLastWeek(self) -> int:
+    def getUserInfo(self, domain) -> dict:
         count_of_users = self.userRepository.getCountUsersRegisteredLastWeek()
-        return count_of_users
+        top_users_with_longest_usernames = self.userRepository.getTopLongestUsernames()
+        percent_of_users = self.userRepository.getDomainEmailRatio(domain)
 
-    def getTopLongestUsernames(self) -> list[UserModel]:
-        users = self.userRepository.getTopLongestUsernames()
-        return users
-
-    def getDomainEmailRatio(self, domain: str) -> float:
-        percent = self.getDomainEmailRatio(domain)
-        return percent
+        return {
+            "countUsersForWeek": count_of_users,
+            "percentOfDomain": {
+                "domain": domain,
+                "percent": percent_of_users,
+            },
+            "topUsersWithLongestUsernames": top_users_with_longest_usernames,
+        }

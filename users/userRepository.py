@@ -7,10 +7,10 @@ from .interfaces import IUserRepository
 
 
 class UserRepository(IUserRepository):
-    """Represents a repository for the user resource in application.
+    """Represents a repository for the user resource in database.
 
     Attributes:
-        userModel: Class representing the user model in application.
+        userModel: Class representing the user model in database.
     """
 
     userModel: Type[UserModel] = UserModel
