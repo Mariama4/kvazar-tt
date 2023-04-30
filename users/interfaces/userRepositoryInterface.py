@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Type
 from ..userModel import UserModel
+from ..dto import CreateUserDto
+from ..dto import UpdateUserDto
 
 
 class IUserRepository(ABC):
@@ -25,7 +27,7 @@ class IUserRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def create(self, data: UserModel) -> UserModel:
+    def create(self, data: CreateUserDto) -> UserModel:
         """Creates a new user in the database.
 
         :param data: Dict containing the data for the new user.
@@ -34,28 +36,29 @@ class IUserRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def getById(self, id: int) -> UserModel:
+    def getById(self, user_id: int) -> UserModel:
         """Gets a user with the specified ID from the database.
 
-        :param id: The ID of the user to retrieve.
+        :param user_id: The ID of the user to retrieve.
         :return: The `UserModel` object representing the retrieved user.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def updateById(self, id: int, data: UserModel) -> UserModel:
+    def updateById(self, user_id: int, data: UpdateUserDto) -> UserModel:
         """Updates a user with the specified ID in the database.
 
-        :param id: The ID of the user to update.
+        :param user_id: The ID of the user to update.
         :param data: Dict containing the updated data for the user.
         :return: The `UserModel` object representing the updated user.
         """
         raise NotImplementedError
 
-    def delete(self, id: int) -> bool:
+    @abstractmethod
+    def delete(self, user_id: int) -> bool:
         """Deletes a user with the specified ID from the database.
 
-        :param id: The ID of the user to delete.
+        :param user_id: The ID of the user to delete.
         :return: True if the user was successfully deleted.
         """
         raise NotImplementedError

@@ -1,3 +1,6 @@
+from ..dto import CreateUserDto
+from ..dto import UpdateUserDto
+from ..dto import InfoUsersDto
 from ..userModel import UserModel
 from .userRepositoryInterface import IUserRepository
 from abc import ABC, abstractmethod
@@ -25,7 +28,7 @@ class IUserService(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def create(self, data: UserModel) -> UserModel:
+    def create(self, data: CreateUserDto) -> UserModel:
         """Creates a new user in the user repository.
 
         :param data: Dict containing the data for the new user.
@@ -34,41 +37,41 @@ class IUserService(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def getById(self, id: int) -> UserModel:
+    def getById(self, user_id: int) -> UserModel:
         """Gets a user with the specified ID from the user repository.
 
-        :param id: The ID of the user to retrieve.
+        :param user_id: The ID of the user to retrieve.
         :return: The `UserModel` object representing the retrieved user.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def updateById(self, id: int, data: UserModel) -> UserModel:
+    def updateById(self, user_id: int, data: UpdateUserDto) -> UserModel:
         """Updates a user with the specified ID in the user repository.
 
-        :param id: The ID of the user to update.
+        :param user_id: The ID of the user to update.
         :param data: Dict containing the updated data for the user.
         :return: The `UserModel` object representing the updated user.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, id: int) -> bool:
+    def delete(self, user_id: int) -> bool:
         """Deletes a user with the specified ID from the user repository.
 
-        :param id: The ID of the user to delete.
+        :param user_id: The ID of the user to delete.
         :return: True if the user was successfully deleted.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def getUserInfo(self, data) -> dict:
+    def getUserInfo(self, domain: str) -> InfoUsersDto:
         """Getting information about users:
             - Number of users registered in the last week;
             - Top 5 users with the longest usernames;
             - Percentage of users who have an identical domain.
 
-        :param data: JSON object that contains the domain field
+        :param domain: Email domain
         :return: return a dict
         """
         raise NotImplementedError

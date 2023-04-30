@@ -1,4 +1,7 @@
 from flask import request, Response, jsonify, abort
+
+from . import UserModel
+from .dto import InfoUsersDto, GetInfoUsersDto, CreateUserDto, UpdateUserDto
 from .interfaces import IUserController
 from .interfaces import IUserService
 from .userService import UserService
@@ -14,7 +17,7 @@ class UserController(IUserController):
     userService: IUserService = UserService()
 
     def getUsers(self) -> Response:
-        users = self.userService.getAll()
+        users: list[UserModel] = self.userService.getAll()
         return jsonify(users)
 
     def getPaginatedUsers(self) -> Response:
@@ -23,31 +26,31 @@ class UserController(IUserController):
         if page is None or per_page is None:
             abort(400, "Не переданы значения.")
 
-        users = self.userService.getPaginatedUsers(page, per_page)
+        users: list[UserModel] = self.userService.getPaginatedUsers(page=page, per_page=per_page)
         return jsonify(users)
 
     def create(self) -> Response:
-        data = request.json
-        user = self.userService.create(data)
+        data: CreateUserDto = request.json
+        user: UserModel = self.userService.create(data)
         return jsonify(user)
 
-    def getById(self, id: int) -> Response:
-        user = self.userService.getById(id)
+    def getById(self, user_id: int) -> Response:
+        user: UserModel = self.userService.getById(user_id=user_id)
         return jsonify(user)
 
-    def updateById(self, id: int) -> Response:
-        data = request.json
-        user = self.userService.updateById(id, data)
+    def updateById(self, user_id: int) -> Response:
+        data: UpdateUserDto = request.json
+        user: UserModel = self.userService.updateById(user_id=user_id, data=data)
         return jsonify(user)
 
-    def delete(self, id: int) -> Response:
-        result = self.userService.delete(id)
+    def delete(self, user_id: int) -> Response:
+        result = self.userService.delete(user_id)
         return jsonify({"deleted": result})
 
     def getUsersInfo(self) -> Response:
-        data = request.json
+        data: GetInfoUsersDto = request.json
         if not (data["domain"]):
             raise abort(400, "Нет параметра `domain`")
         domain = data["domain"]
-        users_info = self.userService.getUserInfo(domain)
+        users_info: InfoUsersDto = self.userService.getUserInfo(domain=domain)
         return jsonify(users_info)

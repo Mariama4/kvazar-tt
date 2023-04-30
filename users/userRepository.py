@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from typing import Type
 from flask import abort
+
+from .dto import CreateUserDto, UpdateUserDto
 from .userModel import UserModel
 from .userModel import db
 from .interfaces import IUserRepository
@@ -32,7 +34,7 @@ class UserRepository(IUserRepository):
         else:
             return users
 
-    def create(self, data: UserModel) -> UserModel:
+    def create(self, data: CreateUserDto) -> UserModel:
         try:
             user = self.userModel(username=data["username"], email=data["email"])
 
@@ -43,13 +45,15 @@ class UserRepository(IUserRepository):
         else:
             return user
 
-    def getById(self, id: int) -> UserModel:
-        user = self.userModel.query.get_or_404(id)
+    def getById(self, user_id: int) -> UserModel:
+        user = self.userModel.query.get_or_404(
+            user_id, description="Такого пользователя нет"
+        )
         return user
 
-    def updateById(self, id: int, data: UserModel) -> UserModel:
+    def updateById(self, user_id: int, data: UpdateUserDto) -> UserModel:
         user = self.userModel.query.get_or_404(
-            id, description="Такого пользователя нет"
+            user_id, description="Такого пользователя нет"
         )
         try:
             user.username = data["username"]
@@ -61,8 +65,10 @@ class UserRepository(IUserRepository):
         else:
             return user
 
-    def delete(self, id: int) -> bool:
-        user = self.userModel.query.get_or_404(id)
+    def delete(self, user_id: int) -> bool:
+        user = self.userModel.query.get_or_404(
+            user_id, description="Такого пользователя нет"
+        )
         try:
             db.session.delete(user)
             db.session.commit()
