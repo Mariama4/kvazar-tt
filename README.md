@@ -29,7 +29,12 @@
 * Исправить предупреждение в тестах: test_delete_user - LegacyAPIWarning
 * Улучшить качество тестов, убрать повторения кода
 
-**Документация к API выполнена на swagger по стандарту openapi 3.0.0**
+**Test coverage:**
+* Stmts: 436
+* Miss: 46
+* Cover: 89%
+
+**Документация swagger к API выполнена на swagger по стандарту openapi 3.0.0**
 
 ## Запуск проекта
 
